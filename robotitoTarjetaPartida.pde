@@ -123,6 +123,7 @@ void addCard(int x, int y) {
     allCards.add(new ConditionalCard(x, y, cardSize));
   } else {
     allCards.add(new ColorCard(x, y, cardSize, cardColor));
+    println(colorToName(cardColor));
   }
 }
 
@@ -161,7 +162,7 @@ String colorToName(int colorNow) {
     toReturn = "yellow";
     break;
   case -389333:
-    toReturn = "green";
+    toReturn = "red";
     break;
   case -14584326:
     toReturn = "blue";
