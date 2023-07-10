@@ -39,10 +39,7 @@ class Robotito {
     draw4lights();
     drawDirectionLights();
   }
-  //void updatePosition(int x, int y) {
-  //  xpos = x;
-  //  ypos = y;
-  //}
+
   void updatePosition(int x, int y) {
     xpos = x;
     ypos = y;
