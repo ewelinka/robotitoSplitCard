@@ -22,7 +22,6 @@ class ColorCard extends Card{
       back.noStroke();
     }
     back.rect(xpos, ypos, cardSize, cardSize);
-    back.text(id,xpos, ypos);
     back.endDraw();
   }
 

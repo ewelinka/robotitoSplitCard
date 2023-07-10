@@ -52,6 +52,7 @@ void draw() {
   if (!stopRobot) {
     robotito.update();
   }
+  robotito.drawRobotitoAndLights();
 }
 
 void mousePressed() {
@@ -169,7 +170,7 @@ String colorToName(int colorNow) {
     toReturn = "marker";
     break;
   }
-  return toReturn;s
+  return toReturn;
 }
 
 void deleteSelectedCard() {
