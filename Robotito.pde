@@ -32,7 +32,8 @@ class Robotito {
         }
       }
     }
-
+  }
+  void drawRobotitoAndLights() {
     drawRobotito();
     //circle(xpos+offsetX, ypos+offsetY, 10); // debugging sensing position
     translate(xpos, ypos);

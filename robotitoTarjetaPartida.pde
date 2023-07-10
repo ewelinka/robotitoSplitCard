@@ -169,7 +169,7 @@ String colorToName(int colorNow) {
     toReturn = "marker";
     break;
   }
-  return toReturn;
+  return toReturn;s
 }
 
 void deleteSelectedCard() {
