@@ -35,7 +35,7 @@ class Robotito {
     }
 
     drawRobotito();
-    circle(xpos+offsetX, ypos+offsetY, 10);
+    //circle(xpos+offsetX, ypos+offsetY, 10); // debugging sensing position
     translate(xpos, ypos);
     draw4lights();
     drawDirectionLights();
@@ -140,11 +140,8 @@ class Robotito {
   }
 
 
-  // should naturelly ignor black
   void processColorAndId(color currentColor, int id) {
     println("currect color: "+currentColor);
-    // if (currentColor != lastColor) {
-
     if (currentColor == green || currentColor == yellow || currentColor == red || currentColor == blue) {
       if (currentColor == green) {
         println("green detected! 16588774");
@@ -169,7 +166,6 @@ class Robotito {
       }
       ignoredId = id;
     }
-    //}
   }
 
   boolean isPointInside(int x, int y) {

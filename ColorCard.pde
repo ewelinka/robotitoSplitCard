@@ -12,7 +12,7 @@ class ColorCard extends Card{
     back.fill(cardColor);
     if(isSelected){
       back.stroke(markerColor);
-      back.strokeWeight(6);
+      back.strokeWeight(strokeThickness);
     }else{
       back.noStroke();
     }

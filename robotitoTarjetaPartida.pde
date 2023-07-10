@@ -6,6 +6,7 @@ color cardColor, yellow, blue, green, red, white, markerColor;
 int cardSize;
 boolean puttingCards, puttingConditionalCard, stopRobot;
 int offsetSensing;
+int strokeThickness;
 
 Card selectedCard;
 int ignoredId;
@@ -38,10 +39,12 @@ void setup() {
   stopRobot = false;
   offsetSensing = cardSize/2;
   ignoredId = 0;
+  strokeThickness = 4;
+  allCards = new ArrayList<Card>();
+  initWithCards();
 
   // VERY IMPORTANT: Allways initialize the library in the setup
   RG.init(this);
-  allCards = new ArrayList<Card>();
 }
 
 void draw() {
@@ -68,7 +71,7 @@ void mouseDragged() {
       currentCard.updatePosition(mouseX, mouseY);
     }
   }
- 
+
   if (robotito.isPointInside(mouseX, mouseY)) {
     robotito.updatePosition(mouseX, mouseY);
   }
@@ -170,4 +173,17 @@ String colorToName(int colorNow) {
 
 void deleteSelectedCard() {
   allCards.remove(selectedCard);
+}
+void initWithCards() {
+  int x = 0 + cardSize/2 + 10;
+  int y = height - cardSize/2 -10;
+  allCards.add(new ColorCard(x, y, cardSize, green));
+  x = x + cardSize + 10;
+  allCards.add(new ColorCard(x, y, cardSize, red));
+  x = x + cardSize + 10;
+  allCards.add(new ColorCard(x, y, cardSize, yellow));
+  x = x + cardSize + 10;
+  allCards.add(new ColorCard(x, y, cardSize, blue));
+  x = x + cardSize + 10;
+  allCards.add(new ConditionalCard(x, y, cardSize));
 }

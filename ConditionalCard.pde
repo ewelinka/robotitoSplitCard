@@ -1,5 +1,5 @@
 class ConditionalCard extends Card { //<>// //<>//
-  CardTriangle topTriangle, rightTriangle, bottomTriangle, leftTriangle ;
+  CardTriangle triangle1, triangle2, triangle3, triangle4 ;
   ArrayList<CardTriangle> allTriangles;
   CardTriangle selectedTriangle;
 
@@ -7,20 +7,20 @@ class ConditionalCard extends Card { //<>// //<>//
     super(x, y, cSize);
     isConditional = true;
     allTriangles = new ArrayList<CardTriangle>();
-    topTriangle = new CardTriangle(x, y, cSize, green);
-    allTriangles.add(topTriangle);
-    rightTriangle = new CardTriangle(x, y, cSize, yellow);
-    rightTriangle.triangle.rotate(radians(90), x, y);
-    allTriangles.add(rightTriangle);
-    bottomTriangle = new CardTriangle(x, y, cSize, red);
-    bottomTriangle.triangle.rotate(radians(180), x, y);
-    allTriangles.add(bottomTriangle);
-    leftTriangle = new CardTriangle(x, y, cSize, blue);
-    leftTriangle.triangle.rotate(radians(270), x, y);
-    allTriangles.add(leftTriangle);
+    triangle1 = new CardTriangle(x, y, cSize, green);
+    allTriangles.add(triangle1);
+    triangle2 = new CardTriangle(x, y, cSize, yellow);
+    triangle2.triangle.rotate(radians(90), x, y);
+    allTriangles.add(triangle2);
+    triangle3 = new CardTriangle(x, y, cSize, red);
+    triangle3.triangle.rotate(radians(180), x, y);
+    allTriangles.add(triangle3);
+    triangle4 = new CardTriangle(x, y, cSize, blue);
+    triangle4.triangle.rotate(radians(270), x, y);
+    allTriangles.add(triangle4);
   }
 
-  void processMouseXY(int x, int y){
+  void processMouseXY(int x, int y) {
     // check which part of the card was selected and highlight
     for (CardTriangle currentTriangle : allTriangles) {
       if (isSelected) {
@@ -35,10 +35,15 @@ class ConditionalCard extends Card { //<>// //<>//
       }
     }
   }
-  
 
-  
-  CardTriangle getSelectedTriangle(){
+
+  void updatePosition(int x, int y) {
+    xpos = x;
+    ypos = y;
+    updateAllTrianglesPositions(x, y);
+  }
+
+  CardTriangle getSelectedTriangle() {
     return selectedTriangle;
   }
 
@@ -50,17 +55,16 @@ class ConditionalCard extends Card { //<>// //<>//
   }
 
   void drawAllTriangles() {
-    topTriangle.drawTriangle();
-    rightTriangle.drawTriangle();
-    bottomTriangle.drawTriangle();
-    leftTriangle.drawTriangle();
+    for (CardTriangle currentTriangle : allTriangles) {
+      currentTriangle.drawTriangle();
+    }
   }
 
   void drawSelection() {
     // rectangle
     back.beginDraw();
     back.stroke(markerColor);
-    back.strokeWeight(6);
+    back.strokeWeight(strokeThickness);
     back.noFill();
     back.rect(xpos, ypos, cardSize, cardSize);
     back.endDraw();
@@ -69,13 +73,18 @@ class ConditionalCard extends Card { //<>// //<>//
   }
 
   void rotateAllXDegrees(float deg) {
-    topTriangle.triangle.rotate(radians(deg), xpos, ypos);
-    rightTriangle.triangle.rotate(radians(deg), xpos, ypos);
-    bottomTriangle.triangle.rotate(radians(deg), xpos, ypos);
-    leftTriangle.triangle.rotate(radians(deg), xpos, ypos);
+    for (CardTriangle currentTriangle : allTriangles) {
+      currentTriangle.triangle.rotate(radians(deg), xpos, ypos);
+    }
   }
 
   void rotateCenter90Degrees() {
     rotateAllXDegrees(90);
+  }
+
+  void updateAllTrianglesPositions(int x, int y) {
+    for (CardTriangle currentTriangle : allTriangles) {
+      currentTriangle.updatePosition(x,y);
+    }
   }
 }

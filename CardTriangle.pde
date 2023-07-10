@@ -30,7 +30,7 @@ class CardTriangle {
   void drawSelection() {
     back.beginDraw();
     back.stroke(markerColor);
-    back.strokeWeight(3);
+    back.strokeWeight(strokeThickness/2);
     back.noFill();
     back.beginShape();
     back.vertex(triangle.getPoints()[0].x, triangle.getPoints()[0].y);
@@ -43,9 +43,22 @@ class CardTriangle {
   void setIsSelected(boolean is) {
     isSelectedTriangle = is;
   }
-  
-  void setNextColor(){
+
+  void setNextColor() {
     colorTriangle = getNextColor(colorTriangle);
+  }
+
+  void updatePosition(int x, int y) {
+    triangle.getPoints()[0].x = triangle.getPoints()[0].x - centerX + x;
+    triangle.getPoints()[1].x = triangle.getPoints()[1].x - centerX + x;
+    triangle.getPoints()[2].x = triangle.getPoints()[2].x - centerX + x;
+    
+    triangle.getPoints()[0].y = triangle.getPoints()[0].y - centerY + y;
+    triangle.getPoints()[1].y = triangle.getPoints()[1].y - centerY + y;
+    triangle.getPoints()[2].y = triangle.getPoints()[2].y - centerY + y;
+    
+    centerX = x;
+    centerY = y;
   }
 
   float area(int x1, int y1, int x2, int y2, int x3, int y3) {

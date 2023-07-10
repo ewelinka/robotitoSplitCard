@@ -14,6 +14,12 @@ class Card {
     isSelected = false;
     id = millis();
   }
+  
+  Card(int x, int y, int cSize, int fixedId) {
+    this(x,y,cSize);
+    id = fixedId;
+  }
+  
   void updatePosition(int x, int y) {
     xpos = x;
     ypos = y;
