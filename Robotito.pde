@@ -28,7 +28,6 @@ class Robotito {
     for (Card currentCard : allCards) {
       if (currentCard.isPointInside(xpos+offsetX, ypos+offsetY)) {
         if (currentCard.id != ignoredId) {
-          println("currentCard.id "+currentCard.id +" ignoredId "+ignoredId);
           processColorAndId(back.get(xpos+offsetX, ypos+offsetY), currentCard.id);
         }
       }
@@ -40,6 +39,10 @@ class Robotito {
     draw4lights();
     drawDirectionLights();
   }
+  //void updatePosition(int x, int y) {
+  //  xpos = x;
+  //  ypos = y;
+  //}
   void updatePosition(int x, int y) {
     xpos = x;
     ypos = y;
@@ -141,10 +144,8 @@ class Robotito {
 
 
   void processColorAndId(color currentColor, int id) {
-    println("currect color: "+currentColor);
     if (currentColor == green || currentColor == yellow || currentColor == red || currentColor == blue) {
       if (currentColor == green) {
-        println("green detected! 16588774");
         directionY = -1;
         directionX = 0;
         activeDirection = 1;
@@ -152,17 +153,14 @@ class Robotito {
         directionY = 0;
         directionX = 1;
         activeDirection = 2;
-        println("yellow detected! 331743");
       } else if (currentColor == red) {
         directionY = 1;
         directionX = 0;
         activeDirection = 3;
-        println("red detected! 389333");
       } else if (currentColor == blue) {
         directionY = 0;
         directionX = -1;
         activeDirection = 4;
-        println("blue detected! 14584326");
       }
       ignoredId = id;
     }

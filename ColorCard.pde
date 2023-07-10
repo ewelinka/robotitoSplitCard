@@ -6,6 +6,11 @@ class ColorCard extends Card{
     cardColor = cColor;
     isConditional = false;
   }
+  ColorCard(int x, int y, int cSize, color cColor, int fixedId){
+    super(x,y,cSize,fixedId);
+    cardColor = cColor;
+    isConditional = false;
+  }
   
   void addToBackground(){
     back.beginDraw();

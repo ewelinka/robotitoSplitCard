@@ -71,8 +71,9 @@ void mouseDragged() {
       currentCard.updatePosition(mouseX, mouseY);
     }
   }
-
-  if (robotito.isPointInside(mouseX, mouseY)) {
+//if (robotito.isPointInside(mouseX, mouseY))
+  if(dist(robotito.xpos, robotito.ypos, mouseX, mouseY) < robotito.size/2)
+   {
     robotito.updatePosition(mouseX, mouseY);
   }
 }
@@ -177,13 +178,13 @@ void deleteSelectedCard() {
 void initWithCards() {
   int x = 0 + cardSize/2 + 10;
   int y = height - cardSize/2 -10;
-  allCards.add(new ColorCard(x, y, cardSize, green));
+  allCards.add(new ColorCard(x, y, cardSize, green, 1));
   x = x + cardSize + 10;
-  allCards.add(new ColorCard(x, y, cardSize, red));
+  allCards.add(new ColorCard(x, y, cardSize, red, 2));
   x = x + cardSize + 10;
-  allCards.add(new ColorCard(x, y, cardSize, yellow));
+  allCards.add(new ColorCard(x, y, cardSize, yellow, 3));
   x = x + cardSize + 10;
-  allCards.add(new ColorCard(x, y, cardSize, blue));
+  allCards.add(new ColorCard(x, y, cardSize, blue, 4));
   x = x + cardSize + 10;
-  allCards.add(new ConditionalCard(x, y, cardSize));
+  allCards.add(new ConditionalCard(x, y, cardSize, 5));
 }

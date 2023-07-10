@@ -6,6 +6,15 @@ class ConditionalCard extends Card { //<>// //<>//
   ConditionalCard(int x, int y, int cSize) {
     super(x, y, cSize);
     isConditional = true;
+    initTriangles(x,y,cSize);
+  }
+    ConditionalCard(int x, int y, int cSize, int fixedId) {
+    super(x, y, cSize, fixedId);
+    isConditional = true;
+    initTriangles(x,y,cSize);
+  }
+  
+  void initTriangles(int x, int y, int cSize){
     allTriangles = new ArrayList<CardTriangle>();
     triangle1 = new CardTriangle(x, y, cSize, green);
     allTriangles.add(triangle1);
