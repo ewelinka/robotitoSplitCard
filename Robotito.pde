@@ -22,6 +22,7 @@ class Robotito {
     if ((xpos > width) || (xpos < 0)) {
       directionX = 0;
     }
+    // ---------- SPECIFIC FOR THIS SIMULATION ----------
     // calculate offset necesary to change direction in the middle of the card depending direction
     int offsetX = directionX*offsetSensing*-1;
     int offsetY = directionY*offsetSensing*-1;
@@ -33,9 +34,13 @@ class Robotito {
       }
     }
   }
+
+
   void drawRobotitoAndLights() {
     drawRobotito();
-    //circle(xpos+offsetX, ypos+offsetY, 10); // debugging sensing position
+    int offsetX = directionX*offsetSensing*-1;
+    int offsetY = directionY*offsetSensing*-1;
+    circle(xpos+offsetX, ypos+offsetY, 10); // debugging sensing position
     translate(xpos, ypos);
     draw4lights();
     drawDirectionLights();
