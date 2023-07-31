@@ -2,6 +2,7 @@ class Robotito {
   int ypos, xpos, speed, size, directionX, directionY, ledSize, activeDirection;
   color colorRobotito, lastColor;
   float ledDistance;
+  boolean isSelected;
   Robotito (int x, int y) {
     xpos = x;
     ypos = y;
@@ -12,6 +13,7 @@ class Robotito {
     directionX = directionY = activeDirection = 0;
     colorRobotito = #FCB603;
     lastColor = white;
+    isSelected = false;
   }
   void update() {
     xpos += speed*directionX;
@@ -22,25 +24,28 @@ class Robotito {
     if ((xpos > width) || (xpos < 0)) {
       directionX = 0;
     }
-    // ---------- SPECIFIC FOR THIS SIMULATION ----------
-    // calculate offset necesary to change direction in the middle of the card depending direction
     int offsetX = directionX*offsetSensing*-1;
     int offsetY = directionY*offsetSensing*-1;
-    for (Card currentCard : allCards) {
-      if (currentCard.isPointInside(xpos+offsetX, ypos+offsetY)) {
-        if (currentCard.id != ignoredId) {
-          processColorAndId(back.get(xpos+offsetX, ypos+offsetY), currentCard.id);
+    boolean awayFromCards = true; // will be used to undo ignoredId and allow to repeat violet
+      for (Card currentCard : allCards) {
+        if (currentCard.isPointInside(xpos+offsetX, ypos+offsetY)) {
+          awayFromCards = false;
+          if (currentCard.id != ignoredId) {
+            processColorAndId(back.get(xpos+offsetX, ypos+offsetY), currentCard.id);
+          }
         }
       }
-    }
+      if (awayFromCards){
+        ignoredId = -1;
+      }
   }
 
 
   void drawRobotitoAndLights() {
     drawRobotito();
-    int offsetX = directionX*offsetSensing*-1;
-    int offsetY = directionY*offsetSensing*-1;
-    circle(xpos+offsetX, ypos+offsetY, 10); // debugging sensing position
+    //int offsetX = directionX*offsetSensing*-1;
+    //int offsetY = directionY*offsetSensing*-1;
+    //circle(xpos+offsetX, ypos+offsetY, 10); // debugging sensing position
     translate(xpos, ypos);
     draw4lights();
     drawDirectionLights();
@@ -52,7 +57,7 @@ class Robotito {
   }
   void drawRobotito() {
     fill(colorRobotito);
-    stroke(185);
+    stroke(strokeColor);
     circle(xpos, ypos, size);
     fill(255);
     noStroke();
@@ -64,12 +69,11 @@ class Robotito {
   }
   void draw4lights() {
     // 4 lights
-
     // green light
     pushMatrix();
     translate(0, -ledDistance);
     fill(green);
-    stroke(185);
+    stroke(strokeColor);
     circle(0, 0, ledSize);
     popMatrix();
     // red light
@@ -77,7 +81,6 @@ class Robotito {
     rotate(radians(180));
     translate(0, -ledDistance);
     fill(red);
-    stroke(185);
     circle(0, 0, ledSize);
     popMatrix();
     //yellow
@@ -85,7 +88,6 @@ class Robotito {
     rotate(radians(90));
     translate(0, -ledDistance);
     fill(yellow);
-    stroke(185);
     circle(0, 0, ledSize);
     popMatrix();
     //blue
@@ -93,7 +95,6 @@ class Robotito {
     rotate(radians(270));
     translate(0, -ledDistance);
     fill(blue);
-    stroke(185);
     circle(0, 0, ledSize);
     popMatrix();
   }
@@ -119,7 +120,7 @@ class Robotito {
     rotate(radians(rotation) + radians(360/24));
     translate(0, -ledDistance);
     fill(ledArcColor);
-    stroke(185);
+    stroke(strokeColor);
     circle(0, 0, ledSize);
     popMatrix();
     pushMatrix();
@@ -133,14 +134,12 @@ class Robotito {
     rotate(radians(rotation)-radians(360/24));
     translate(0, -ledDistance);
     fill(ledArcColor);
-    stroke(185);
     circle(0, 0, ledSize);
     popMatrix();
     pushMatrix();
     rotate(radians(rotation)-radians(360/24)*2);
     translate(0, -ledDistance);
     fill(ledArcColor);
-    stroke(185);
     circle(0, 0, ledSize);
     popMatrix();
   }
@@ -169,7 +168,7 @@ class Robotito {
     }
   }
 
-  boolean isPointInside(int x, int y) {
-    return x >= xpos-size/2 && x <= xpos+size/2 && y >= ypos-size/2 && y <= ypos+size/2;
+  void setIsSelected(boolean is) {
+    isSelected = is;
   }
 }

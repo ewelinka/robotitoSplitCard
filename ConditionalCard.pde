@@ -1,4 +1,4 @@
-class ConditionalCard extends Card { //<>// //<>//
+class ConditionalCard extends Card { //<>// //<>// //<>//
   CardTriangle triangle1, triangle2, triangle3, triangle4 ;
   ArrayList<CardTriangle> allTriangles;
   CardTriangle selectedTriangle;
