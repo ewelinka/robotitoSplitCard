@@ -1,1 +1,2 @@
-# robotitoSplittedCard
+# Split card for Robotito
+A prototype of a new functionality for Robotito. The split card is a multicolor card containing four sections. Each section can have a different color, although it is also possible to have sections with repeated colors. The direction in which the robot will move after detecting the card depends on the side from which the robot approaches it. This allows a single card to encode up to four different directions for the robot.
